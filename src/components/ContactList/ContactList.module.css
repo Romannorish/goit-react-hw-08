@@ -1,0 +1,14 @@
+.listContact {
+  list-style: none;
+  padding: 0;
+}
+
+.listBox {
+  margin: 0 auto;
+  margin: 5px 10px;
+}
+
+.item {
+  list-style: none;
+  margin-bottom: 10px;
+}
