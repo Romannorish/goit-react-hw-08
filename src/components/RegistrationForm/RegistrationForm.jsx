@@ -1,24 +1,24 @@
 import css from "./RegistrationForm.module.css"
 import {ErrorMessage, Field, Form, Formik} from "formik"
 import * as Yup from "yup"
-import {useDispatch} from "react-redux"
-import {addContact} from "../../redux/contactsOps"
+// import {useDispatch} from "react-redux"
 
-export default function ContactForm() {
-  const dispatch = useDispatch()
+export default function RegistrationForm() {
+  // const dispatch = useDispatch()
   const InitialData = {
     name: "",
     email: "",
     password: "",
   }
   const hundleSubmit = (data, formActions) => {
-    dispatch(addContact(data))
+    console.log("data", data)
     formActions.resetForm()
   }
 
   const formValidSchema = Yup.object().shape({
     name: Yup.string().min(2, "Too Short!").max(50, "Too Long!").required("Required"),
-    number: Yup.number().required("Required"),
+    email: Yup.string().min(8, "Too Short!").max(50, "Too Long!").required("Required"),
+    password: Yup.number().required("Required"),
   })
 
   return (
@@ -60,7 +60,7 @@ export default function ContactForm() {
           aria-label="Register"
           title="click to Register"
         >
-          Add new contact
+          Sign In
         </button>
       </Form>
     </Formik>

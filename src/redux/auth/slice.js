@@ -1,23 +1,7 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { refreshUser, userLogIn, userLogOut} from "./operations";
-import axios from "axios";
 
-const setAuthHeader = (token) => {
-    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-  };
+import { createSlice } from "@reduxjs/toolkit";
+import { refreshUser, userLogIn, userLogOut, userRegister} from "./operations";
 
-export const userRegister = createAsyncThunk(
-    "auth/register",
-    async (userInfo, thunkAPI) => {
-      try {
-        const response = await axios.post("/users/signup", userInfo);
-        setAuthHeader(response.data.token);
-        return response.data;
-      } catch (error) {
-        return thunkAPI.rejectWithValue(error.message);
-      }
-    }
-  );
 
 const initialUserInfo = {
   user: {
