@@ -1,15 +1,15 @@
-import css from "./App.module.css"
-import ContactList from "./ContactList/ContactList"
-import SearchBar from "./SearchBox/SearchBox"
-import ContactForm from "./ContactForm/ContactForm"
+import css from "../App.module.css"
+import ContactList from "../components/ContactList/ContactList"
+import SearchBar from "../components/SearchBox/SearchBox"
+import ContactForm from "../components/ContactForm/ContactForm"
 import {useEffect} from "react"
 import {useDispatch, useSelector} from "react-redux"
 import {fetchContacts} from "../redux/contactsOps"
-import Loader from "./Loader/Loader"
+import Loader from "../components/Loader/Loader"
 import {selectIsError, selectIsLoading} from "../selectors/selectors"
-import ErrorMessage from "./ErrorMessage/ErrorMessage"
+import ErrorMessage from "../components/ErrorMessage/ErrorMessage"
 
-function App() {
+export default function ContactsPage() {
   const dispatch = useDispatch()
   const isLoading = useSelector(selectIsLoading)
   const error = useSelector(selectIsError)
@@ -31,5 +31,3 @@ function App() {
     </>
   )
 }
-
-export default App

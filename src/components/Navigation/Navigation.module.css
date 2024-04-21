@@ -1,0 +1,28 @@
+.header {
+  height: 80px;
+  background-color: black;
+}
+.navigation {
+  padding: 10px 0;
+  vertical-align: middle;
+}
+.list {
+  list-style: none;
+  display: flex;
+}
+.item {
+  color: #ffff;
+  text-decoration: none;
+  margin-left: 15px;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  font-size: 22px;
+}
+
+.item:first-child {
+  margin: 0;
+}
+
+.item:hover,
+.item:focus {
+  text-decoration: underline;
+}
