@@ -1,11 +1,11 @@
-import css from "./RegistrationForm.module.css"
+import css from "./LoginForm.module.css"
 import {ErrorMessage, Field, Form, Formik} from "formik"
 import {useDispatch} from "react-redux"
 import * as Yup from "yup"
-import {userRegister} from "../../redux/auth/operations"
+import {userLogIn} from "../../redux/auth/operations"
 // import {useDispatch} from "react-redux"
 
-export default function RegistrationForm() {
+export default function LoginForm() {
   const dispatch = useDispatch()
   const InitialData = {
     name: "",
@@ -13,7 +13,7 @@ export default function RegistrationForm() {
     password: "",
   }
   const hundleSubmit = (data, formActions) => {
-    dispatch(userRegister(data))
+    dispatch(userLogIn(data))
     formActions.resetForm()
   }
 
@@ -26,7 +26,7 @@ export default function RegistrationForm() {
   return (
     <Formik initialValues={InitialData} onSubmit={hundleSubmit} validationSchema={formValidSchema}>
       <Form className={css.form}>
-        <h1>Registration</h1>
+        <h1>Login</h1>
         <label className={css.lable}>
           Name
           <span className={css.text}></span>
@@ -61,9 +61,9 @@ export default function RegistrationForm() {
           className={css.btnSubmit}
           type="submit"
           aria-label="Register"
-          title="click to Register"
+          title="click to sing in"
         >
-          Sign up
+          Sign In
         </button>
       </Form>
     </Formik>

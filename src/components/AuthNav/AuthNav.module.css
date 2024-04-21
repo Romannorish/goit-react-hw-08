@@ -9,14 +9,15 @@
 .list {
   list-style: none;
   display: flex;
+  justify-content: center;
+  padding: 0;
 }
 .item {
-  color: #ffff;
+  color: #000000;
   text-decoration: none;
   margin-left: 15px;
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
   font-size: 22px;
-  vertical-align: middle;
 }
 
 .item:first-child {
