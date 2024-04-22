@@ -8,25 +8,32 @@ import {fetchContacts} from "../redux/contactsOps"
 import Loader from "../components/Loader/Loader"
 import {selectIsError, selectIsLoading} from "../selectors/selectors"
 import ErrorMessage from "../components/ErrorMessage/ErrorMessage"
+import {selectUserContacts} from "../redux/contacts/selectors"
+import {addContacts} from "../redux/contacts/operations"
 
 export default function ContactsPage() {
   const dispatch = useDispatch()
   const isLoading = useSelector(selectIsLoading)
   const error = useSelector(selectIsError)
+  const contacts = useSelector(selectUserContacts)
 
   useEffect(() => {
     dispatch(fetchContacts())
   }, [dispatch])
 
+  const handleAddContact = (formData) => {
+    dispatch(addContacts(formData))
+  }
+
   return (
     <>
       <div className={css.containerApp}>
         <h1 className={css.title}>Phonebook</h1>
-        <ContactForm />
+        <ContactForm handleAddContact={handleAddContact} />
         <SearchBar />
-        {isLoading && !error && <Loader />}
+        {isLoading && <Loader />}
         {error && <ErrorMessage error={error} />}
-        {!isLoading && !error && <ContactList />}
+        {contacts && <ContactList />}
       </div>
     </>
   )

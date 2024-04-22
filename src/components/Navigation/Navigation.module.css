@@ -1,5 +1,6 @@
 .header {
-  height: 80px;
+  display: flex;
+  height: 100px;
   background-color: black;
 }
 .navigation {

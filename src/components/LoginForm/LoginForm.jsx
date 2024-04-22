@@ -8,31 +8,25 @@ import {userLogIn} from "../../redux/auth/operations"
 export default function LoginForm() {
   const dispatch = useDispatch()
   const InitialData = {
-    name: "",
     email: "",
     password: "",
   }
-  const hundleSubmit = (data, formActions) => {
-    dispatch(userLogIn(data))
+  const hundleSubmit = (formData, formActions) => {
+    dispatch(userLogIn(formData))
     formActions.resetForm()
   }
 
   const formValidSchema = Yup.object().shape({
-    name: Yup.string().min(2, "Too Short!").max(50, "Too Long!").required("Required"),
-    email: Yup.string().min(8, "Too Short!").max(50, "Too Long!").required("Required"),
-    password: Yup.number().required("Required"),
+    email: Yup.string().required("Email is required!").email("Must be a valid email!"),
+    password: Yup.string()
+      .required("Password is required!")
+      .min(8, "Password must be at least 8 characters!"),
   })
 
   return (
     <Formik initialValues={InitialData} onSubmit={hundleSubmit} validationSchema={formValidSchema}>
       <Form className={css.form}>
         <h1>Login</h1>
-        <label className={css.lable}>
-          Name
-          <span className={css.text}></span>
-          <Field className={css.input} id="name" type="text" name="name" placeholder="User name" />
-          <ErrorMessage className={css.errorMess} name="name" component="span" />
-        </label>
         <label className={css.lable}>
           Email
           <span className={css.text}></span>

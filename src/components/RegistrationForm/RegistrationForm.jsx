@@ -12,15 +12,20 @@ export default function RegistrationForm() {
     email: "",
     password: "",
   }
-  const hundleSubmit = (data, formActions) => {
-    dispatch(userRegister(data))
+  const hundleSubmit = (userInfo, formActions) => {
+    dispatch(userRegister(userInfo))
     formActions.resetForm()
   }
 
   const formValidSchema = Yup.object().shape({
-    name: Yup.string().min(2, "Too Short!").max(50, "Too Long!").required("Required"),
-    email: Yup.string().min(8, "Too Short!").max(50, "Too Long!").required("Required"),
-    password: Yup.number().required("Required"),
+    name: Yup.string()
+      .required("User name is required!")
+      .min(2, "User name must be at least 2 characters!")
+      .max(50, "User name must be less than 50 characters!"),
+    email: Yup.string().required("Email is required!").email("Must be a valid email!"),
+    password: Yup.string()
+      .required("Password is required!")
+      .min(8, "Password must be at least 8 characters!"),
   })
 
   return (
