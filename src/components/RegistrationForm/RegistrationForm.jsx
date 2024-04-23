@@ -60,7 +60,13 @@ export default function RegistrationForm() {
           <label className={css.lable}>
             Email
             <span className={css.text}></span>
-            <Field className={css.input} type="text" name="email" placeholder="enter your email" />
+            <Field
+              className={css.input}
+              id="email"
+              type="text"
+              name="email"
+              placeholder="enter your email"
+            />
             <ErrorMessage className={css.errorMess} name="email" component="span" />
           </label>
           <label className={css.lable}>
@@ -68,6 +74,7 @@ export default function RegistrationForm() {
             <span className={css.text}></span>
             <Field
               className={css.input}
+              id="password"
               type="password"
               name="password"
               placeholder="enter you password"

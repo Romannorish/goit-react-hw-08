@@ -5,16 +5,16 @@ export const instance = axios.create({
     baseURL: 'https://connections-api.herokuapp.com',
 })
 
-const setAuthHeader = (token) => {
+const AuthHeader = (token) => {
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   };
 
 
-export const setToken = (token) => {
+export const setAuthHeader = (token) => {
     instance.defaults.headers.common.Authorization = `Bearer ${token}`
 }
 
-export const clearToken = () => {
+export const clearAuthHeader = () => {
     instance.defaults.headers.common.Authorization = ""
 }
 
@@ -23,7 +23,7 @@ export const userRegister = createAsyncThunk(
     async (userInfo, thunkAPI) => {
       try {
         const {data}= await instance.post("/users/signup", userInfo);
-        setAuthHeader(data.token);
+        AuthHeader(data.token);
         return data;
       } catch (error) {
         return thunkAPI.rejectWithValue(error.message);
@@ -36,7 +36,7 @@ export const userRegister = createAsyncThunk(
     async (formData, thunkAPI) => {
       try {
           const {data} = await instance.post("/users/login", formData);
-          setToken(data.token)
+          setAuthHeader(data.token)
   
           return data;
       } catch (err) {
@@ -51,7 +51,7 @@ export const userRegister = createAsyncThunk(
       const state = thunkAPI.getState();
       const token = state.auth.token;
   
-      setToken(token);
+      setAuthHeader(token);
       try {
         const {data} = await instance.get("/users/current");
   
@@ -74,7 +74,7 @@ export const userRegister = createAsyncThunk(
       async (_, thunkAPI) => {
       try {
           const {data} = await instance.post("/users/logout")
-          clearToken()
+          clearAuthHeader()
       
           return data
       } catch (err) {
