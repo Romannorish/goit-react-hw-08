@@ -37,4 +37,6 @@
   color: rgb(198, 43, 43);
 }
 
-/* style for home welcome page */
+.userMenuHeader {
+  display: flex;
+}

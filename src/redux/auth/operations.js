@@ -22,9 +22,9 @@ export const userRegister = createAsyncThunk(
     "auth/register",
     async (userInfo, thunkAPI) => {
       try {
-        const response = await instance.post("/users/signup", userInfo);
-        setAuthHeader(response.data.token);
-        return response.data;
+        const {data}= await instance.post("/users/signup", userInfo);
+        setAuthHeader(data.token);
+        return data;
       } catch (error) {
         return thunkAPI.rejectWithValue(error.message);
       }
@@ -79,5 +79,5 @@ export const userRegister = createAsyncThunk(
           return data
       } catch (err) {
           return thunkAPI.rejectWithValue(err.message)
-      }
+      } 
   })

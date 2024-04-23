@@ -4,10 +4,7 @@ import { refreshUser, userLogIn, userLogOut, userRegister} from "./operations";
 
 
 const initialUserInfo = {
-  user: {
-    name: null,
-    email: null,
-  },
+  userData: null,
   token: null,
   isLoggedIn: false,
   loader: false,
@@ -25,7 +22,7 @@ const authSlice = createSlice({
       })
       .addCase(userRegister.fulfilled, (state, action) => {
         state.loader = false;
-        state.user = action.payload.user;
+        state.userData = action.payload.user;
         state.token = action.payload.token;
         state.isLoggedIn = true;
       })
@@ -38,7 +35,7 @@ const authSlice = createSlice({
       })
       .addCase(userLogIn.fulfilled, (state, action) => {
         state.loader = false;
-        state.user = action.payload.user;
+        state.userData = action.payload.user;
         state.token = action.payload.token;
         state.isLoggedIn = true;
       })
@@ -51,7 +48,7 @@ const authSlice = createSlice({
       })
       .addCase(userLogOut.fulfilled, (state) => {
         state.loader = false;
-        state.user = {
+        state.userData = {
           name: null,
           email: null,
         };
@@ -66,7 +63,7 @@ const authSlice = createSlice({
         state.isRefreshing = true;
       })
       .addCase(refreshUser.fulfilled, (state, action) => {
-        state.user = action.payload;
+        state.userData = action.payload;
         state.isLoggedIn = true;
         state.isRefreshing = false;
       })

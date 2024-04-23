@@ -3,6 +3,7 @@ import {ErrorMessage, Field, Form, Formik} from "formik"
 import {useDispatch} from "react-redux"
 import * as Yup from "yup"
 import {userLogIn} from "../../redux/auth/operations"
+import toast, {Toaster} from "react-hot-toast"
 // import {useDispatch} from "react-redux"
 
 export default function LoginForm() {
@@ -13,6 +14,12 @@ export default function LoginForm() {
   }
   const hundleSubmit = (formData, formActions) => {
     dispatch(userLogIn(formData))
+      .then(() => {
+        toast.success("Login sucssess")
+      })
+      .cathe(() => {
+        toast.error("Sorry, Login error.")
+      })
     formActions.resetForm()
   }
 
@@ -24,42 +31,42 @@ export default function LoginForm() {
   })
 
   return (
-    <Formik initialValues={InitialData} onSubmit={hundleSubmit} validationSchema={formValidSchema}>
-      <Form className={css.form}>
-        <h1>Login</h1>
-        <label className={css.lable}>
-          Email
-          <span className={css.text}></span>
-          <Field
-            className={css.input}
-            id="email"
-            type="email"
-            name="email"
-            placeholder="enter your email"
-          />
-          <ErrorMessage className={css.errorMess} name="email" component="span" />
-        </label>
-        <label className={css.lable}>
-          Password
-          <span className={css.text}></span>
-          <Field
-            className={css.input}
-            id="password"
-            type="password"
-            name="password"
-            placeholder="enter you password"
-          />
-          <ErrorMessage className={css.errorMess} name="password" component="span" />
-        </label>
-        <button
-          className={css.btnSubmit}
-          type="submit"
-          aria-label="Register"
-          title="click to sing in"
-        >
-          Sign In
-        </button>
-      </Form>
-    </Formik>
+    <>
+      <Formik
+        initialValues={InitialData}
+        onSubmit={hundleSubmit}
+        validationSchema={formValidSchema}
+      >
+        <Form className={css.form}>
+          <h1>Login</h1>
+          <label className={css.lable}>
+            Email
+            <span className={css.text}></span>
+            <Field className={css.input} type="text" name="email" placeholder="enter your email" />
+            <ErrorMessage className={css.errorMess} name="email" component="span" />
+          </label>
+          <label className={css.lable}>
+            Password
+            <span className={css.text}></span>
+            <Field
+              className={css.input}
+              type="password"
+              name="password"
+              placeholder="enter you password"
+            />
+            <ErrorMessage className={css.errorMess} name="password" component="span" />
+          </label>
+          <button
+            className={css.btnSubmit}
+            type="submit"
+            aria-label="Register"
+            title="click to sing in"
+          >
+            Sign In
+          </button>
+        </Form>
+      </Formik>
+      <Toaster position="top-right" reverseOrder={false} />
+    </>
   )
 }

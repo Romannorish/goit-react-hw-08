@@ -3,6 +3,7 @@ import {ErrorMessage, Field, Form, Formik} from "formik"
 import {useDispatch} from "react-redux"
 import * as Yup from "yup"
 import {userRegister} from "../../redux/auth/operations"
+import toast, {Toaster} from "react-hot-toast"
 // import {useDispatch} from "react-redux"
 
 export default function RegistrationForm() {
@@ -14,6 +15,13 @@ export default function RegistrationForm() {
   }
   const hundleSubmit = (userInfo, formActions) => {
     dispatch(userRegister(userInfo))
+      .unwrap()
+      .then(() => {
+        toast.success("Registration sucssess")
+      })
+      .cathe(() => {
+        toast.error("Sorry, Registration error.")
+      })
     formActions.resetForm()
   }
 
@@ -29,48 +37,55 @@ export default function RegistrationForm() {
   })
 
   return (
-    <Formik initialValues={InitialData} onSubmit={hundleSubmit} validationSchema={formValidSchema}>
-      <Form className={css.form}>
-        <h1>Registration</h1>
-        <label className={css.lable}>
-          Name
-          <span className={css.text}></span>
-          <Field className={css.input} id="name" type="text" name="name" placeholder="User name" />
-          <ErrorMessage className={css.errorMess} name="name" component="span" />
-        </label>
-        <label className={css.lable}>
-          Email
-          <span className={css.text}></span>
-          <Field
-            className={css.input}
-            id="email"
-            type="email"
-            name="email"
-            placeholder="enter your email"
-          />
-          <ErrorMessage className={css.errorMess} name="email" component="span" />
-        </label>
-        <label className={css.lable}>
-          Password
-          <span className={css.text}></span>
-          <Field
-            className={css.input}
-            id="password"
-            type="password"
-            name="password"
-            placeholder="enter you password"
-          />
-          <ErrorMessage className={css.errorMess} name="password" component="span" />
-        </label>
-        <button
-          className={css.btnSubmit}
-          type="submit"
-          aria-label="Register"
-          title="click to Register"
-        >
-          Sign up
-        </button>
-      </Form>
-    </Formik>
+    <>
+      <Formik
+        initialValues={InitialData}
+        onSubmit={hundleSubmit}
+        validationSchema={formValidSchema}
+      >
+        <Form className={css.form}>
+          <h1>Registration</h1>
+          <label className={css.lable}>
+            Name
+            <span className={css.text}></span>
+            <Field
+              className={css.input}
+              id="name"
+              type="text"
+              name="name"
+              placeholder="User name"
+            />
+            <ErrorMessage className={css.errorMess} name="name" component="span" />
+          </label>
+
+          <label className={css.lable}>
+            Email
+            <span className={css.text}></span>
+            <Field className={css.input} type="text" name="email" placeholder="enter your email" />
+            <ErrorMessage className={css.errorMess} name="email" component="span" />
+          </label>
+          <label className={css.lable}>
+            Password
+            <span className={css.text}></span>
+            <Field
+              className={css.input}
+              type="password"
+              name="password"
+              placeholder="enter you password"
+            />
+            <ErrorMessage className={css.errorMess} name="password" component="span" />
+          </label>
+          <button
+            className={css.btnSubmit}
+            type="submit"
+            aria-label="Register"
+            title="click to Register"
+          >
+            Sign up
+          </button>
+        </Form>
+      </Formik>
+      <Toaster position="top-right" reverseOrder={false} />
+    </>
   )
 }
