@@ -15,7 +15,6 @@ export default function RegistrationForm() {
   }
   const hundleSubmit = (userInfo, formActions) => {
     dispatch(userRegister(userInfo))
-      .unwrap()
       .then(() => {
         toast.success("Registration sucssess")
       })
