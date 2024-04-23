@@ -18,7 +18,7 @@ export default function RegistrationForm() {
       .then(() => {
         toast.success("Registration sucssess")
       })
-      .cathe(() => {
+      .catch(() => {
         toast.error("Sorry, Registration error.")
       })
     formActions.resetForm()

@@ -17,7 +17,7 @@ export default function LoginForm() {
       .then(() => {
         toast.success("Login sucssess")
       })
-      .cathe(() => {
+      .catch(() => {
         toast.error("Sorry, Login error.")
       })
     formActions.resetForm()
